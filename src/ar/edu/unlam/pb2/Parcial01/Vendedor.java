@@ -1,8 +1,13 @@
 package ar.edu.unlam.pb2.Parcial01;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Vendedor extends Persona {
-	private int ventas;
+	
 	String dni;
+	
+	List<Venta> ventasRealizadas = new ArrayList<>();
+	
 	double porcentajeComision;
     public Vendedor(String dni,String nombre) {
 		super(nombre);
@@ -10,13 +15,9 @@ public class Vendedor extends Persona {
 		// TODO Auto-generated constructor stub
 	}
 
-    
-
 	public String getDni() {
 		return dni;
 	}
-
-
 
 	public void setDni(String dni) {
 		this.dni = dni;
@@ -31,23 +32,18 @@ public class Vendedor extends Persona {
         this.porcentajeComision = porcentajeComision;
     }
 
-	public int getVentas() {
-		return ventas;
-	}
-
-
-	public void setVentas(int ventas) {
-		this.ventas = ventas;
-	}
-
-	
 	@Override
 	public String getNombre() {
 		// TODO Auto-generated method stub
 		return super.getNombre();
 	}
-
-	public void incrementarVentas() {
-        this.ventas++;
-    }
+	
+	public void agregarVenta(Venta venta) {
+		ventasRealizadas.add(venta);
+	}
+	
+	
+	public Integer getCantidadDeVentasRealizadas() {
+		return ventasRealizadas.size();
+	}
 }

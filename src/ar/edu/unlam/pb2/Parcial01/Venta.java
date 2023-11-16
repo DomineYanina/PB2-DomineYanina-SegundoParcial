@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Venta {
-	String codigo;
-	Vendedor vendedor;
+	private String codigo;
+	private Vendedor vendedor;
 	private Map<String, Vendible> items = new HashMap<>();
-	Cliente cliente;
-	Double total;
+	private Cliente cliente;
+	private Double total;
 	
 	
 	public Venta(String codigo, Cliente cliente, Vendedor vendedor) {
