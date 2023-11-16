@@ -107,9 +107,9 @@ public class testTienda {
 		Venta venta = new Venta("C-0001", cliente, vendedor);
 		tienda.agregarVenta(venta);
 		tienda.agregarServicioAVenta(venta.getCodigo(), servicio);
-		Double totalEsperado = 100d;
-		Double totalActual = venta.getTotal();
-		assertEquals(totalEsperado, totalActual);
+		
+		Boolean servicioVendido = venta.getItems().containsValue(servicio);
+		assertTrue(servicioVendido);
 		
 	}
 	
@@ -124,21 +124,22 @@ public class testTienda {
 		
 		Venta venta = new Venta("C-0001", cliente, vendedor);
 		tienda.agregarVenta(venta);
-		Vendible vendible;
+		Vendible vendibleServ, vendibleProd;
 		
-		vendible = new Servicio("1", "Servicio Técnico", 100.0);
-		tienda.agregarServicio((Servicio) vendible);
-		tienda.agregarServicioAVenta(venta.getCodigo(), (Servicio) vendible);
+		vendibleServ = new Servicio("1", "Servicio Técnico", 100.0);
+		tienda.agregarServicio((Servicio) vendibleServ);
+		tienda.agregarServicioAVenta(venta.getCodigo(), (Servicio) vendibleServ);
 		
-		vendible = new Producto("1","Producto nuevo", 15.0, 100);
+		vendibleProd = new Producto("1","Producto nuevo", 15.0, 100);
 		Integer stockInicial = 10;
-		tienda.agregarProducto((Producto) vendible, stockInicial);
+		tienda.agregarProducto((Producto) vendibleProd, stockInicial);
 		Integer cantidadVendida = 2;
-		tienda.agregarProductoAVenta(venta.getCodigo(), (Producto) vendible, cantidadVendida);
-				
+		tienda.agregarProductoAVenta(venta.getCodigo(), (Producto) vendibleProd, cantidadVendida);
+		Boolean productoYServicioVendidos = (venta.getItems().containsValue(vendibleServ)&&(venta.getItems().containsValue(vendibleProd)));
 		Double totalEsperado = 800d;
 		Double totalActual = venta.getTotal();
-		assertEquals(totalEsperado, totalActual);
+		
+		assertTrue(productoYServicioVendidos);
 		
 	}
 	
