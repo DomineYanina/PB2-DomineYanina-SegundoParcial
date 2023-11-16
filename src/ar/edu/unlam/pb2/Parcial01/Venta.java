@@ -7,12 +7,14 @@ public class Venta {
 	private String codigo;
 	private Vendedor vendedor;
 	private Map<String, Vendible> items = new HashMap<>();
+	private Integer cantidad;
 	private Cliente cliente;
 	private Double total;
 	
 	
-	public Venta(String codigo, Cliente cliente, Vendedor vendedor) {
+	public Venta(String codigo, Cliente cliente, Vendedor vendedor, Integer cantidad) {
 		super();
+		this.cantidad=cantidad;
 		this.codigo = codigo;
 		this.cliente = cliente;
 		this.vendedor = vendedor;

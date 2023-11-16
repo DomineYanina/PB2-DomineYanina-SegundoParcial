@@ -61,7 +61,7 @@ public class testTienda {
 		Producto producto = new Producto("1","Producto nuevo", 15.0, 100);
 		Integer stockInicial = 10;
 		tienda.agregarProducto((Producto) producto, stockInicial);
-		Venta ticket = new Venta("C-0001", cliente, vendedor);
+		Venta ticket = new Venta("C-0001", cliente, vendedor, 1);
 		tienda.agregarVenta(ticket);
 		Integer cantidadVendida = 5;
 		tienda.agregarProductoAVenta(ticket.getCodigo(), (Producto) producto, cantidadVendida);
@@ -83,7 +83,7 @@ public class testTienda {
 		Producto producto = new Producto("1","Producto nuevo", 15.0, 100);
 		Integer stockInicial = 10;
 		tienda.agregarProducto(producto, stockInicial);
-		Venta ticket = new Venta("C-0001", cliente, vendedor);
+		Venta ticket = new Venta("C-0001", cliente, vendedor, 1);
 		tienda.agregarVenta(ticket);
 		Integer cantidadVendida = 15;
 		tienda.agregarProductoAVenta(ticket.getCodigo(), producto, cantidadVendida);
@@ -104,7 +104,7 @@ public class testTienda {
 		tienda.agregarProducto((Producto) producto, stockInicial);
 		
 		tienda.agregarServicio((Servicio) servicio);
-		Venta venta = new Venta("C-0001", cliente, vendedor);
+		Venta venta = new Venta("C-0001", cliente, vendedor, 1);
 		tienda.agregarVenta(venta);
 		tienda.agregarServicioAVenta(venta.getCodigo(), servicio);
 		
@@ -122,7 +122,7 @@ public class testTienda {
 		String dniEjemplo = "12345678";
 		Vendedor vendedor = new Vendedor (dniEjemplo, "Vendedor de ejemplo");
 		
-		Venta venta = new Venta("C-0001", cliente, vendedor);
+		Venta venta = new Venta("C-0001", cliente, vendedor, 1);
 		tienda.agregarVenta(venta);
 		Vendible vendibleServ, vendibleProd;
 		
@@ -172,8 +172,8 @@ public class testTienda {
         Cliente cliente = new Cliente(cuitCliente, "Cliente de ejemplo");
         tienda.agregarCliente(cliente);
 
-        Venta venta1 = new Venta("C-0001", cliente, vendedor);
-        Venta venta2 = new Venta("C-0002", cliente, vendedor);
+        Venta venta1 = new Venta("C-0001", cliente, vendedor, 5);
+        Venta venta2 = new Venta("C-0002", cliente, vendedor, 5);
         tienda.agregarVenta(venta1);
         tienda.agregarVenta(venta2);
 
