@@ -7,17 +7,23 @@ public class Venta {
 	private String codigo;
 	private Vendedor vendedor;
 	private Map<String, Vendible> items = new HashMap<>();
-	private Integer cantidad;
 	private Cliente cliente;
 	private Double total;
-	
+	private Double comisionVendedor;
 	
 	public Venta(String codigo, Cliente cliente, Vendedor vendedor, Integer cantidad) {
 		super();
-		this.cantidad=cantidad;
 		this.codigo = codigo;
 		this.cliente = cliente;
 		this.vendedor = vendedor;
+	}
+	
+	public void setComisionVendedor() {
+		this.comisionVendedor=((this.total*vendedor.getPorcentajeComision())/100);
+	}
+	
+	public double getComisionVendedor() {
+		return this.comisionVendedor;
 	}
 	
 	public String getCodigo() {
@@ -54,25 +60,29 @@ public class Venta {
 	}
 	
 	public Double calcularTotal() {
-        Double total = 0.0;
-        
+        this.total = 0.0;
+
         for (Vendible vendible : items.values()) {
-            total += vendible.getPrecio() * vendible.getCantidad();
+            this.total += vendible.getPrecio() * vendible.getCantidadVendida();
         }
-        
-        return total;
+
+        return this.total;
     }
 
 	public void agregarVendible(Vendible vendible, int cantidad) {
         String codigo = vendible.getCodigo();
-        
+
         if (items.containsKey(codigo)) {
             Vendible itemExistente = items.get(codigo);
-            itemExistente.setCantidad(itemExistente.getCantidad() + cantidad);
+            itemExistente.setCantidad(itemExistente.getCantidadVendida() + cantidad);
         } else {
-            vendible.setCantidad(cantidad);
+            vendible.setCantidadVendida(cantidad);
             items.put(codigo, vendible);
         }
+
+        // Actualizar el total de la venta
+        this.total = calcularTotal();
+        setComisionVendedor();
     }
 
 	public Vendedor getVendedor() {

@@ -87,7 +87,6 @@ public class testTienda {
 		tienda.agregarVenta(ticket);
 		Integer cantidadVendida = 15;
 		tienda.agregarProductoAVenta(ticket.getCodigo(), producto, cantidadVendida);
-		
 	}
 	
 	@Test
@@ -171,22 +170,22 @@ public class testTienda {
         Cliente cliente = new Cliente(cuitCliente, "Cliente de ejemplo");
         tienda.agregarCliente(cliente);
 
-        Venta venta1 = new Venta("C-0001", cliente, vendedor, 5);
-        Venta venta2 = new Venta("C-0002", cliente, vendedor, 5);
+        Vendedor vendedorExistente = tienda.getVendedor(dniVendedor);
+        Producto producto = new Producto("1", "Producto nuevo", 15.0, 100);
+        tienda.agregarProducto(producto, 10);
+        
+        Venta venta1 = new Venta("C-0001", cliente, vendedor, 1);
+        Venta venta2 = new Venta("C-0002", cliente, vendedor, 1);
         tienda.agregarVenta(venta1);
         tienda.agregarVenta(venta2);
 
         tienda.establecerPorcentajeComisionVendedor(dniVendedor, 10.0);
 
-        Vendedor vendedorExistente = tienda.getVendedor(dniVendedor);
-        Producto producto = new Producto("1", "Producto nuevo", 15.0, 100);
-        tienda.agregarProducto(producto, 10);
-
         tienda.agregarProductoAVenta(venta1.getCodigo(), producto, 2);
         tienda.agregarProductoAVenta(venta2.getCodigo(), producto, 3);
 
         // Act
-        double montoTotalEsperado = (2 * 15 + 3 * 15) * 0.10; // Total de ventas x comisión
+        double montoTotalEsperado = (((2 * 15 + 3 * 15) * 10.0)/100); // Total de ventas x comisión
         double montoTotalActual = tienda.calcularMontoTotalComisionesVendedor(dniVendedor);
 
         // Assert

@@ -84,7 +84,7 @@ public class Tienda {
         if (venta == null) {
             throw new VentaInexistenteException("Venta no encontrada: " + codigoVenta);
         }
-        return venta.getTotal();
+        return venta.calcularTotal();
     }
 
     public Vendible getVendible(String codigo) throws VendibleInexistenteException {
@@ -131,17 +131,18 @@ public class Tienda {
     }
 
     
-    public double calcularMontoTotalComisionesVendedor(String dniVendedor) {
+    public double calcularMontoTotalComisionesVendedor(String dniVendedor) throws VendedorInexistenteException {
         Vendedor vendedor = vendedores.get(dniVendedor);
         if (vendedor != null) {
             double totalComisiones = 0.0;
             for (Venta venta : ventas.values()) {
                 if (venta.getVendedor().getDni().equals(dniVendedor)) {
-                    totalComisiones += venta.calcularTotal() * (vendedor.getPorcentajeComision() / 100);
+                    totalComisiones += venta.getComisionVendedor();
                 }
             }
             return totalComisiones;
         }
-        return 0.0; // Si el vendedor no existe, retornar 0.
+        throw new VendedorInexistenteException("Vendedor no encontrado: " + dniVendedor);
     }
+
 }

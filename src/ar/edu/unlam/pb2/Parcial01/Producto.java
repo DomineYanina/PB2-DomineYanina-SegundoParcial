@@ -5,12 +5,14 @@ public class Producto implements Vendible  {
 	private Integer stockActual;
 	private String nombre;
     private double precio;
+    private Integer cantidadVendida;
 
     public Producto(String codigo, String nombre, double precio, Integer stockActual) {
         this.codigo=codigo;
     	this.nombre = nombre;
         this.precio = precio;
         this.stockActual=stockActual;
+        this.cantidadVendida = 0;
     }
 
     @Override
@@ -57,7 +59,7 @@ public class Producto implements Vendible  {
 
 	@Override
 	public void setCantidad(int cantidad) {
-		// TODO Auto-generated method stub
+		this.cantidadVendida=cantidad;
 		
 	}
 
@@ -67,6 +69,16 @@ public class Producto implements Vendible  {
 		return this.stockActual;
 	}
 
+	@Override
+	public Integer getCantidadVendida() {
+		// TODO Auto-generated method stub
+		return this.cantidadVendida;
+	}
+
+	@Override
+	public void setCantidadVendida(Integer cantidad) {
+		this.cantidadVendida=cantidad;
+	}
 
 
 }
