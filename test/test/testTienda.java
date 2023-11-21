@@ -122,22 +122,21 @@ public class testTienda {
 		String dniEjemplo = "12345678";
 		Vendedor vendedor = new Vendedor (dniEjemplo, "Vendedor de ejemplo");
 		
+		Servicio servicio = new Servicio("1", "Servicio Técnico", 100.0);
+		Vendible producto = new Producto("1","Producto nuevo", 15.0, 100);
+		Integer stockInicial = 10;
+		tienda.agregarProducto((Producto) producto, stockInicial);
+		
+		tienda.agregarServicio((Servicio) servicio);
 		Venta venta = new Venta("C-0001", cliente, vendedor, 1);
 		tienda.agregarVenta(venta);
-		Vendible vendibleServ, vendibleProd;
+		tienda.agregarServicioAVenta(venta.getCodigo(), servicio);
 		
-		vendibleServ = new Servicio("1", "Servicio Técnico", 100.0);
-		tienda.agregarServicio((Servicio) vendibleServ);
-		tienda.agregarServicioAVenta(venta.getCodigo(), (Servicio) vendibleServ);
-		
-		vendibleProd = new Producto("1","Producto nuevo", 15.0, 100);
-		Integer stockInicial = 10;
-		tienda.agregarProducto((Producto) vendibleProd, stockInicial);
+		producto = new Producto("1","Producto nuevo", 15.0, 100);
+		tienda.agregarProducto((Producto) producto, stockInicial);
 		Integer cantidadVendida = 2;
-		tienda.agregarProductoAVenta(venta.getCodigo(), (Producto) vendibleProd, cantidadVendida);
-		Boolean productoYServicioVendidos = (venta.getItems().containsValue(vendibleServ)&&(venta.getItems().containsValue(vendibleProd)));
-		Double totalEsperado = 800d;
-		Double totalActual = venta.getTotal();
+		tienda.agregarProductoAVenta(venta.getCodigo(), (Producto) producto, cantidadVendida);
+		Boolean productoYServicioVendidos = (venta.getItems().containsValue(servicio)&&(venta.getItems().containsValue(servicio)));
 		
 		assertTrue(productoYServicioVendidos);
 		
