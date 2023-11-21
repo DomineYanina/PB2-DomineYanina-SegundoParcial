@@ -43,6 +43,7 @@ public class Tienda {
 
     public void agregarVenta(Venta venta) {
         ventas.put(venta.getCodigo(), venta);
+        venta.getVendedor().agregarVenta(venta);
     }
 
     public void agregarProductoAVenta(String codigoVenta, Producto producto, int cantidad) throws StockInsuficienteException, VentaInexistenteException, VendibleInexistenteException {

@@ -170,7 +170,6 @@ public class testTienda {
         Cliente cliente = new Cliente(cuitCliente, "Cliente de ejemplo");
         tienda.agregarCliente(cliente);
 
-        Vendedor vendedorExistente = tienda.getVendedor(dniVendedor);
         Producto producto = new Producto("1", "Producto nuevo", 15.0, 100);
         tienda.agregarProducto(producto, 10);
         
@@ -191,5 +190,6 @@ public class testTienda {
         // Assert
         assertEquals(montoTotalEsperado, montoTotalActual, 0.01); // Utiliza una tolerancia
     }
+    
 
 }
