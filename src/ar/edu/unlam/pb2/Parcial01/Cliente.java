@@ -1,8 +1,8 @@
 package ar.edu.unlam.pb2.Parcial01;
 
 public class Cliente extends Persona {
-	String email;
-	String cuit;
+	private String email;
+	private String cuit;
 
 	public Cliente(String cuit,String nombre) {
 		super(nombre);

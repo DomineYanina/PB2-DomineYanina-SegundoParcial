@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Tienda {
+	
     private String cuit;
     private String nombre;
+    
     private Map<String, Vendible> vendibles = new HashMap<>();
     private Map<String, Integer> stock = new HashMap<>();
     private Map<String, Cliente> clientes = new HashMap<>();
@@ -17,7 +19,6 @@ public class Tienda {
         this.nombre = nombre;
     }
     
-
     public void agregarServicio(Servicio servicio) {
         vendibles.put(servicio.getCodigo(), servicio);
         stock.put(servicio.getCodigo(), 0);
@@ -85,6 +86,7 @@ public class Tienda {
         if (venta == null) {
             throw new VentaInexistenteException("Venta no encontrada: " + codigoVenta);
         }
+        
         return venta.calcularTotal();
     }
 
@@ -93,6 +95,7 @@ public class Tienda {
         if (vendible == null) {
             throw new VendibleInexistenteException("Vendible no encontrado: " + codigo);
         }
+        
         return vendible;
     }
 
@@ -105,6 +108,7 @@ public class Tienda {
         if (cliente == null) {
             throw new ClienteInexistenteException("Cliente no encontrado: " + cuit);
         }
+        
         return cliente;
     }
 
@@ -113,6 +117,7 @@ public class Tienda {
         if (vendedor == null) {
             throw new VendedorInexistenteException("Vendedor no encontrado: " + dni);
         }
+        
         return vendedor;
     }
     
@@ -128,22 +133,25 @@ public class Tienda {
         if (vendedor != null) {
             return vendedor.getPorcentajeComision();
         }
+        
         return 0.0; // Si el vendedor no existe, retornar 0.
     }
 
     
     public double calcularMontoTotalComisionesVendedor(String dniVendedor) throws VendedorInexistenteException {
         Vendedor vendedor = vendedores.get(dniVendedor);
-        if (vendedor != null) {
-            double totalComisiones = 0.0;
-            for (Venta venta : ventas.values()) {
-                if (venta.getVendedor().getDni().equals(dniVendedor)) {
-                    totalComisiones += venta.getComisionVendedor();
-                }
+        if (vendedor == null) {
+        	throw new VendedorInexistenteException("Vendedor no encontrado: " + dniVendedor);
+        } 
+        
+        double totalComisiones = 0.0;
+        for (Venta venta : ventas.values()) {
+        	if (dniVendedor.equals(venta.getVendedor().getDni())) {
+        		totalComisiones += venta.getComisionVendedor();
             }
-            return totalComisiones;
         }
-        throw new VendedorInexistenteException("Vendedor no encontrado: " + dniVendedor);
+        
+        return totalComisiones;
     }
 
 }

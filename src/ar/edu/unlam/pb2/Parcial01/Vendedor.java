@@ -4,14 +4,13 @@ import java.util.List;
 
 public class Vendedor extends Persona {
 	
-	String dni;
-	double porcentajeComision;
-	List<Venta> ventasRealizadas = new ArrayList<>();
+	private String dni;
+	private double porcentajeComision;
+	private List<Venta> ventasRealizadas = new ArrayList<>();
 	
     public Vendedor(String dni,String nombre) {
 		super(nombre);
-		this.dni=dni;
-		// TODO Auto-generated constructor stub
+		this.dni = dni;
 	}
 
 	public String getDni() {
@@ -31,7 +30,8 @@ public class Vendedor extends Persona {
 		for (Venta ven : ventasRealizadas) {
 			comisionesObtenidas=+ven.getTotal();
 		}
-		comisionesObtenidas=((comisionesObtenidas*this.porcentajeComision)/100);
+		comisionesObtenidas = ((comisionesObtenidas*this.porcentajeComision)/100);
+		
 		return comisionesObtenidas;
 	}
 
